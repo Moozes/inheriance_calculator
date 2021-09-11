@@ -147,7 +147,7 @@
             if(my_find(table, "father").number == 1) {
                 inheritance_result_table.push({
                     relation : "father",
-                    share : Math.round((1/6)*10000)/10000,
+                    share : 1/6,
                     reason : "fardan",
                     info : [
                         "if the shares are more then 1, Decreased from his share according to his original share"
@@ -156,7 +156,7 @@
             } else if(my_find(table, "paternal grandfather").number == 1) {
                 inheritance_result_table.push({
                     relation : "paternal grandfather",
-                    share : Math.round((1/6)*10000)/10000,
+                    share : 1/6,
                     reason : "fardan",
                     info : [
                         "if the shares are more then 1, Decreased from his share according to his original share"
@@ -168,7 +168,7 @@
             if(my_find(table, "mother").number == 1) {
                 inheritance_result_table.push({
                     relation : "mother",
-                    share : Math.round((1/6)*10000)/10000,
+                    share : 1/6,
                     reason : "fardan",
                     info : [
                         "if the shares are more then 1, Decreased from her share according to her original share"
@@ -178,7 +178,7 @@
                 if(my_find(table, "paternal grandmother").number == 1) {
                     inheritance_result_table.push({
                         relation : "maternal grandmother",
-                        share : Math.round((1/12)*10000)/10000,
+                        share : 1/12,
                         reason : "fardan",
                         info : [
                             "if the shares are more then 1, Decreased from her share according to her original share",
@@ -187,7 +187,7 @@
                     })
                     inheritance_result_table.push({
                         relation : "paternal grandmother",
-                        share : Math.round((1/12)*10000)/10000,
+                        share : 1/12,
                         reason : "fardan",
                         info : [
                             "if the shares are more then 1, Decreased from her share according to her original share",
@@ -197,7 +197,7 @@
                 } else {
                     inheritance_result_table.push({
                         relation : "maternal grandmother",
-                        share : Math.round((1/6)*10000)/10000,
+                        share : 1/6,
                         reason : "fardan",
                         info : [
                             "if the shares are more then 1, Decreased from her share according to her original share"
@@ -207,7 +207,7 @@
             } else if(my_find(table, "paternal grandmother").number == 1) {
                 inheritance_result_table.push({
                     relation : "paternal grandmother",
-                    share : Math.round((1/6)*10000)/10000,
+                    share : 1/6,
                     reason : "fardan",
                     info : [
                         "if the shares are more then 1, Decreased from her share according to her original share"
@@ -219,7 +219,7 @@
             if(my_find(table, "husband").number == 1) {
                 inheritance_result_table.push({
                     relation : "husband",
-                    share : Math.round((1/4)*10000)/10000,
+                    share : 1/4,
                     reason : "fardan",
                     info : [
                         "if the shares are more then 1, Decreased from his share according to his original share"
@@ -228,7 +228,7 @@
             } else if(my_find(table, "wife").number > 0) {
                 inheritance_result_table.push({
                     relation : "wife",
-                    share : Math.round((1/8)*10000)/10000,
+                    share : 1/8,
                     reason : "fardan",
                     info : [
                         "if the shares are more then 1, Decreased from there shares according to there original shares"
@@ -242,14 +242,14 @@
                     const sons = my_find(table, "son").number;
                     const daughters = my_find(table, "daughter").number;
                     const sum_of_shares = sum(inheritance_result_table);
-                    // if(sum_of_shares < 1) {
+                    if(sum_of_shares <= 1) {
                         const the_rest = 1 - sum_of_shares;
                         const share_of_one_daughter = the_rest / (daughters+(sons*2))
                         const share_of_all_daughters = share_of_one_daughter*daughters;
                         const share_of_all_sons = share_of_one_daughter*sons*2;
                         inheritance_result_table.push({
                             relation : "son",
-                            share : Math.round((share_of_all_sons)*10000)/10000,
+                            share : share_of_all_sons,
                             reason : "ta3siban",
                             info : [
                                 "For the male is like the share of two females"
@@ -257,32 +257,32 @@
                         });
                         inheritance_result_table.push({
                             relation : "daughter",
-                            share : Math.round((share_of_all_daughters)*10000)/10000,
+                            share : share_of_all_daughters,
                             reason : "ta3siban",
                             info : [
                                 "For the male is like the share of two females"
                             ]
                         });
-                    // }
+                    }
                 } else {
                     const sum_of_shares = sum(inheritance_result_table);
-                    // if(sum_of_shares < 1) {
+                    if(sum_of_shares <= 1) {
                         const the_rest = 1 - sum_of_shares;
                         inheritance_result_table.push({
                             relation : "son",
-                            share : Math.round((the_rest)*10000)/10000,
+                            share : the_rest,
                             reason : "ta3siban",
                             info : [
                             ]
                         });
-                    // }
+                    }
                 }
             } else { 
                 if(my_find(table, "daughter").number > 0) {
                     if(my_find(table, "daughter").number == 1) {
                         inheritance_result_table.push({
                             relation : "daughter",
-                            share : Math.round((1/2)*10000)/10000,
+                            share : 1/2,
                             reason : "fardan",
                             info : [
                                 "if the shares are more then 1, Decreased from her share according to her original share"
@@ -291,7 +291,7 @@
                     } else {
                         inheritance_result_table.push({
                             relation : "daughter",
-                            share : Math.round((2/3)*10000)/10000,
+                            share : 2/3,
                             reason : "fardan",
                             info : [
                                 "if the shares are more then 1, Decreased from her share according to her original share"
@@ -304,14 +304,14 @@
                     const son_sons = my_find(table, "son's son").number;
                     const son_daughters = my_find(table, "son's daughter").number;
                     const sum_of_shares = sum(inheritance_result_table);
-                    // if (sum_of_shares < 1) {
+                    if (sum_of_shares <= 1) {
                         const the_rest = 1 - sum_of_shares;
                         const share_of_one_son_daughter = the_rest / (son_daughters+(son_sons*2));
                         const share_of_all_son_daughers = share_of_one_son_daughter * son_daughters;
                         const share_of_all_son_sons = share_of_one_son_daughter * son_sons * 2;
                         inheritance_result_table.push({
                             relation : "son's son",
-                            share : Math.round((share_of_all_son_sons)*10000)/10000,
+                            share : share_of_all_son_sons,
                             reason : "ta3siban",
                             info : [
                                 "if the shares are more then 1, nothing is left for them"
@@ -319,26 +319,26 @@
                         });
                         inheritance_result_table.push({
                             relation : "son's daughter",
-                            share : Math.round((share_of_all_son_daughers)*10000)/10000,
+                            share : share_of_all_son_daughers,
                             reason : "ta3siban",
                             info : [
                                 "if the shares are more then 1, nothing is left for them"
                             ]
                         });
-                    // }
+                    }
                     } else {
                         const sum_of_shares = sum(inheritance_result_table);
-                        // if(sum_of_shares < 1) {
+                        if(sum_of_shares <= 1) {
                             const the_rest = 1 - sum_of_shares;
                             inheritance_result_table.push({
                                 relation : "son's son",
-                                share : Math.round((the_rest)*10000)/10000,
+                                share : the_rest,
                                 reason : "ta3siban",
                                 info : [
                                     "if the shares are more then 1, nothing is left for them"
                                 ]
                             });
-                        // }
+                        }
                     }
             }
 
@@ -1517,7 +1517,7 @@
         
         const inheritance_result_table = [];
 
-        eighth_diagram(table, inheritance_result_table);
+        third_diagram(table, inheritance_result_table);
         print(inheritance_result_table)
    </script>
 </body>
