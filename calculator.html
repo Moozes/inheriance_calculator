@@ -1855,6 +1855,218 @@
         }
 
 
+
+
+        function eleventh_diagram(table, inheritance_result_table) {
+            const wife = my_find(table, "wife").number;
+            const husband = my_find(table, "husband").number;
+            const mother = my_find(table, "mother").number;
+            const maternal_grandmother = my_find(table, "maternal grandmother").number;
+            const paternal_grandmother = my_find(table, "paternal grandmother").number;            
+            const daughter = my_find(table, "daughter").number;
+            const son_daughter = my_find(table, "son's daughter").number;
+
+            // ابن الاخ الشقيق
+            const full_brother_son = my_find(table, "full brother's son").number;
+            // ابن الاخ لاب
+            const paternal_uncle_son = my_find(table, "paternal uncle's son").number;
+            // العم الشقيق
+            const father_full_brother = my_find(table, "father's full brother").number;
+            // العم لاب
+            const father_paternal_uncle = my_find(table, "father's paternal uncle").number;
+            // ابن العم الشقيق
+            const full_paternal_uncle_son = my_find(table, "full paternal uncle's son").number;
+            // يوجد ابن العم لاب
+            const father_paternal_uncle_son = my_find(table, "father's paternal uncle's son").number;
+
+
+
+            if(mother == 1) {
+                inheritance_result_table.push({
+                    relation : "mother",
+                    share : 1/6,
+                    reason : "fardan",
+                    mo3asib : true,
+                    info : [
+                    ]
+                });
+            } else if(maternal_grandmother == 1) {
+                if(paternal_grandmother == 1) {
+                    inheritance_result_table.push({
+                        relation : "maternal grandmother",
+                        share : 1/12,
+                        reason : "fardan",
+                        mo3asib : false,
+                        info : [
+                            "If there is anything left of the estate, it will be returned to him according to his share"
+                        ]
+                    });
+                    inheritance_result_table.push({
+                        relation : "paternal grandmother",
+                        share : 1/12,
+                        reason : "fardan",
+                        mo3asib : false,
+                        info : [
+                            "If there is anything left of the estate, it will be returned to him according to his share"
+                        ]
+                    });
+                } else {
+                    inheritance_result_table.push({
+                        relation : "maternal grandmother",
+                        share : 1/6,
+                        reason : "fardan",
+                        mo3asib : false,
+                        info : [
+                            "If there is anything left of the estate, it will be returned to him according to his share"
+                        ]
+                    });
+                }
+            } else if(paternal_grandmother == 1) {
+                inheritance_result_table.push({
+                    relation : "paternal grandmother",
+                    share : 1/6,
+                    reason : "fardan",
+                    mo3asib : false,
+                    info : [
+                        "If there is anything left of the estate, it will be returned to him according to his share"
+                    ]
+                });
+            }
+
+
+
+
+            if(husband == 1) {
+                inheritance_result_table.push({
+                    relation : "husband",
+                    share : 1/4,
+                    reason : "fardan",
+                    mo3asib : false,
+                    info : [
+                        "If there is anything left of the estate, it will not be returned to him "
+                    ]
+                });
+            } else if(wife > 0) {
+                inheritance_result_table.push({
+                    relation : "wife",
+                    share : 1/8,
+                    reason : "fardan",
+                    mo3asib : false,
+                    info : [
+                        "If there is anything left of the estate, it will not be returned to her "
+                    ]
+                });
+            }
+
+
+            
+
+            if(daughter > 0) {
+                if(daughter == 1) {
+                    inheritance_result_table.push({
+                        relation : "daughter",
+                        share : 1/2,
+                        reason : "fardan",
+                        mo3asib : false,
+                        info : [
+                            "If there is anything left of the estate, it will not be returned to her "
+                        ]
+                    });
+
+                    if(son_daughter > 0) {
+                        inheritance_result_table.push({
+                            relation : "son's daughter",
+                            share : 1/6,
+                            reason : "fardan",
+                            mo3asib : false,
+                            info : [
+                                "If there is anything left of the estate, it will not be returned to her "
+                            ]
+                        });
+                    }
+                } else {
+                    inheritance_result_table.push({
+                        relation : "daughter",
+                        share : 2/3,
+                        reason : "fardan",
+                        mo3asib : false,
+                        info : [
+                            "If there is anything left of the estate, it will not be returned to her "
+                        ]
+                    });
+                }
+            // WE KNOW THAT SON'S DAUGHTER EXISTS
+            } else if(son_daughter == 1) {
+                inheritance_result_table.push({
+                    relation : "son's daughter",
+                    share : 1/2,
+                    reason : "fardan",
+                    mo3asib : false,
+                    info : [
+                        "If there is anything left of the estate, it will not be returned to her "
+                    ]
+                });
+            } else {
+                inheritance_result_table.push({
+                    relation : "son's daughter",
+                    share : 2/3,
+                    reason : "fardan",
+                    mo3asib : false,
+                    info : [
+                        "If there is anything left of the estate, it will not be returned to her "
+                    ]
+                });
+            }
+
+
+            let the_rest = 1 - sum(inheritance_result_table);
+            if(sum(inheritance_result_table) <= 1) {
+                let the_one_that_exists = "";
+
+                if(full_brother_son > 0) {
+                    the_one_that_exists = "full brother's son";
+                } else if(paternal_uncle_son > 0) {
+                    the_one_that_exists = "paternal uncle's son";
+                } else if(father_full_brother > 0) {
+                    the_one_that_exists = "father's full brother";
+                } else if(father_paternal_uncle > 0) {
+                    the_one_that_exists = "father's paternal uncle";
+                } else if(full_paternal_uncle_son > 0) {
+                    the_one_that_exists = "full paternal uncle's son";
+                } else {
+                    // WE KNOW THAT father_paternal_uncle_son EXISTS                
+                    the_one_that_exists = "father's paternal uncle's son";
+                }
+
+                inheritance_result_table.push({
+                    relation : the_one_that_exists,
+                    share : the_rest,
+                    reason : "ta3siban",
+                    mo3asib : false,
+                    info : [
+                        "If there is anything left of the estate, it will not be returned to her "
+                    ]
+                });
+
+
+            }
+
+
+            const sum_of_all_shares = sum(inheritance_result_table);
+            // مسالة عائلة
+            if(sum_of_all_shares >= 1) {
+                for(let i = 0; i < inheritance_result_table.length; i++) {
+                    inheritance_result_table[i].share = inheritance_result_table[i].share * (1/sum_of_all_shares);
+                }
+            } else { // مسالة   ردية
+                print("rediya")
+                give_back_the_rest(inheritance_result_table);
+            
+            }
+
+
+        }
+
         const table = [
             {
                 relation : "wife",
@@ -1952,7 +2164,7 @@
         
         const inheritance_result_table = [];
 
-        tenth_diagram(table, inheritance_result_table);
+        eleventh_diagram(table, inheritance_result_table);
         print(inheritance_result_table)
         for(let i = 0; i<inheritance_result_table.length; i++)
             print(inheritance_result_table[i].relation + " " + Math.round(inheritance_result_table[i].share*10000)/10000)
