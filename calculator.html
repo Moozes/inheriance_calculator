@@ -1314,37 +1314,39 @@
 
             let the_rest = 1 - sum(inheritance_result_table);
             if(full_brother > 0) {
-                if(full_sister > 0) {
-                    const brothers_sisters_number = full_sister+(full_brother*2);
-                    const one_sister_share = the_rest / brothers_sisters_number;
-                    inheritance_result_table.push({
-                        relation : "full brother",
-                        share : one_sister_share*full_brother*2,
-                        reason : "ta3siban",
-                        mo3asib : false,
-                        info : [
-                            "If there is anything left of the estate, it will not be returned to her "
-                        ]
-                    });
-                    inheritance_result_table.push({
-                        relation : "full sister",
-                        share : one_sister_share*full_sister,
-                        reason : "ta3siban",
-                        mo3asib : false,
-                        info : [
-                            "If there is anything left of the estate, it will not be returned to her "
-                        ]
-                    });
-                } else {
-                    inheritance_result_table.push({
-                        relation : "full brother",
-                        share : the_rest,
-                        reason : "ta3siban",
-                        mo3asib : false,
-                        info : [
-                            "If there is anything left of the estate, it will not be returned to her "
-                        ]
-                    });
+                if(sum(inheritance_result_table) <= 1) {
+                    if(full_sister > 0) {
+                        const brothers_sisters_number = full_sister+(full_brother*2);
+                        const one_sister_share = the_rest / brothers_sisters_number;
+                        inheritance_result_table.push({
+                            relation : "full brother",
+                            share : one_sister_share*full_brother*2,
+                            reason : "ta3siban",
+                            mo3asib : false,
+                            info : [
+                                "If there is anything left of the estate, it will not be returned to her "
+                            ]
+                        });
+                        inheritance_result_table.push({
+                            relation : "full sister",
+                            share : one_sister_share*full_sister,
+                            reason : "ta3siban",
+                            mo3asib : false,
+                            info : [
+                                "If there is anything left of the estate, it will not be returned to her "
+                            ]
+                        });
+                    } else {
+                        inheritance_result_table.push({
+                            relation : "full brother",
+                            share : the_rest,
+                            reason : "ta3siban",
+                            mo3asib : false,
+                            info : [
+                                "If there is anything left of the estate, it will not be returned to her "
+                            ]
+                        });
+                    }
                 }
                 
             } else {
@@ -1376,38 +1378,40 @@
 
                 // WE KNOW THAT FATHER'S BROTHER EXISTS
                 the_rest = 1 - sum(inheritance_result_table);
-                if(father_sister > 0) {
-                    the_rest = 1 - sum(inheritance_result_table);
-                    const father_brothers_sisters_number = father_sister+(father_brother*2);
-                    const one_father_sister_share = the_rest / father_brothers_sisters_number;
-                    inheritance_result_table.push({
-                        relation : "father's brother",
-                        share : one_father_sister_share*father_brother*2,
-                        reason : "ta3siban",
-                        mo3asib : false,
-                        info : [
-                            "If there is anything left of the estate, it will not be returned to her "
-                        ]
-                    });
-                    inheritance_result_table.push({
-                        relation : "father's sister",
-                        share : one_father_sister_share*father_sister,
-                        reason : "ta3siban",
-                        mo3asib : false,
-                        info : [
-                            "If there is anything left of the estate, it will not be returned to her "
-                        ]
-                    });
-                } else {
-                    inheritance_result_table.push({
-                        relation : "father's brother",
-                        share : the_rest,
-                        reason : "ta3siban",
-                        mo3asib : false,
-                        info : [
-                            "If there is anything left of the estate, it will not be returned to her "
-                        ]
-                    });
+                if(sum(inheritance_result_table) <= 1) {
+                    if(father_sister > 0) {
+                        the_rest = 1 - sum(inheritance_result_table);
+                        const father_brothers_sisters_number = father_sister+(father_brother*2);
+                        const one_father_sister_share = the_rest / father_brothers_sisters_number;
+                        inheritance_result_table.push({
+                            relation : "father's brother",
+                            share : one_father_sister_share*father_brother*2,
+                            reason : "ta3siban",
+                            mo3asib : false,
+                            info : [
+                                "If there is anything left of the estate, it will not be returned to her "
+                            ]
+                        });
+                        inheritance_result_table.push({
+                            relation : "father's sister",
+                            share : one_father_sister_share*father_sister,
+                            reason : "ta3siban",
+                            mo3asib : false,
+                            info : [
+                                "If there is anything left of the estate, it will not be returned to her "
+                            ]
+                        });
+                    } else {
+                        inheritance_result_table.push({
+                            relation : "father's brother",
+                            share : the_rest,
+                            reason : "ta3siban",
+                            mo3asib : false,
+                            info : [
+                                "If there is anything left of the estate, it will not be returned to her "
+                            ]
+                        });
+                    }
                 }
             }
 
@@ -1525,8 +1529,10 @@
         
         const inheritance_result_table = [];
 
-        seventh_diagram(table, inheritance_result_table);
+        eighth_diagram(table, inheritance_result_table);
         print(inheritance_result_table)
+        for(let i = 0; i<inheritance_result_table.length; i++)
+            print(inheritance_result_table[i].relation + " " + Math.round(inheritance_result_table[i].share*10000)/10000)
    </script>
 </body>
 </html>
