@@ -701,7 +701,7 @@
                 for(let i = 0; i < inheritance_result_table.length; i++) {
                     inheritance_result_table[i].share = inheritance_result_table[i].share * (1/sum_of_all_shares);
                 }
-            } else { // مسالة عادلة او ردية
+            } else if(sum_of_all_shares <= 1){ // مسالة عادلة او ردية
                 // -1 means there is no mo3asib
                 const mo3asib_index = there_is_mo3asib(inheritance_result_table);
                 if(mo3asib_index > -1) { // there is mo3asib, give him the rest
@@ -1517,7 +1517,7 @@
         
         const inheritance_result_table = [];
 
-        fourth_diagram(table, inheritance_result_table);
+        fifth_diagram(table, inheritance_result_table);
         print(inheritance_result_table)
    </script>
 </body>
