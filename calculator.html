@@ -2787,10 +2787,12 @@
         
         const inheritance_result_table = [];
 
-        thirteenth_diagram(table, inheritance_result_table);
-        print(inheritance_result_table)
-        for(let i = 0; i<inheritance_result_table.length; i++)
-            print(inheritance_result_table[i].relation + " " + Math.round(inheritance_result_table[i].share*10000)/10000)
+        path_diagram(table);
+
+        // thirteenth_diagram(table, inheritance_result_table);
+        // print(inheritance_result_table)
+        // for(let i = 0; i<inheritance_result_table.length; i++)
+        //     print(inheritance_result_table[i].relation + " " + Math.round(inheritance_result_table[i].share*10000)/10000)
    </script>
 </body>
 </html>
