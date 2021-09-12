@@ -2341,6 +2341,144 @@
 
 
 
+// =============================================================
+// =============================================================
+// =============================================================
+        function there_is_forod_3isba(table) {
+            for(let i = 0; i < table.length; i++ ) {
+                if(table[i].number > 0) {
+                    return true
+                }
+            }
+            return false;
+        }
+
+        function there_is_only_spouse(table) {
+            const wife = my_find(table, "wife").number;
+            const husband = my_find(table, "husband").number;
+
+            let sum_of_people = 0;
+            for(let i = 0; i < table.length; i++) {
+                sum_of_people += table[i].number;
+            }
+
+            if(sum_of_people == 1 && (wife+husband) == 1) {
+                return true;
+            }
+            return false;
+        }
+
+
+        function is_exceptional_case(table) {
+            const mother = my_find(table, "mother").number;
+            const father = my_find(table, "father").number;
+            const wife = my_find(table, "wife").number;
+            const husband = my_find(table, "husband").number;
+            const full_brother = my_find(table, "full brother").number;
+            const full_sister = my_find(table, "full sister").number;
+
+            let sum_of_people = 0;
+            for(let i = 0; i < table.length; i++) {
+                sum_of_people += table[i].number;
+            }
+
+            if(
+                mother == 1 &&
+                father == 1 &&
+                (wife+husband) == 1 &&
+                (sum_of_people == 3 || (sum_of_people == 4 && (full_brother == 1 || full_sister == 1)) )
+            ) {
+                return true
+            }
+            return false;
+        }
+
+        function is_exceptional_case2(table) {
+
+        }
+
+        function path_diagram(table, inheritance_result_table) {
+            const son = my_find(table, "son").number;
+            const son_son = my_find(table, "son's son").number;
+            const full_brother = my_find(table, "full brother").number;
+            const full_sister = my_find(table, "full sister").number;
+            const father_brother = my_find(table, "father's brother").number;
+            const father_sister = my_find(table, "father's sister").number;
+            const mother_brother = my_find(table, "mother's brother").number;
+            const mother_sister = my_find(table, "mother's sister").number;
+            const daughter = my_find(table, "daughter").number;
+            const son_daughter = my_find(table, "son's daughter").number;
+
+            
+            // ابن الاخ الشقيق
+            const full_brother_son = my_find(table, "full brother's son").number;
+            // ابن الاخ لاب
+            const paternal_uncle_son = my_find(table, "paternal uncle's son").number;
+            // العم الشقيق
+            const father_full_brother = my_find(table, "father's full brother").number;
+            // العم لاب
+            const father_paternal_uncle = my_find(table, "father's paternal uncle").number;
+            // ابن العم الشقيق
+            const full_paternal_uncle_son = my_find(table, "full paternal uncle's son").number;
+            // يوجد ابن العم لاب
+            const father_paternal_uncle_son = my_find(table, "father's paternal uncle's son").number;
+
+
+            if(there_is_forod_3isba(table)) {
+                if(there_is_only_spouse(table)) {
+                    print("diagram 1");
+                } else if (is_exceptional_case(table)) {
+                    print("diagram 2");
+                } else if(son > 0 || son_son > 0) {
+                    print("diagram 3");
+                } else if(full_brother > 0 || father_brother > 0) {
+                    if(daughter + son_daughter > 0) {
+                        print("diagram 7");
+                    } else {
+                        print("diagram 8");
+                    }
+                } else if(full_sister > 0 || father_sister > 0) {
+                    if(daughter + son_daughter > 0) {
+                        print("diagram 9");
+                    } else if(
+                        full_brother_son>0 ||
+                        paternal_uncle_son>0||
+                        father_full_brother>0||
+                        father_paternal_uncle>0||
+                        full_paternal_uncle_son>0||
+                        father_paternal_uncle_son>0
+                    ) {
+                        print("diagram 12");
+                    } else {
+                        print("diagram 10");
+                    }
+                } else if(
+                    full_brother_son>0 ||
+                    paternal_uncle_son>0||
+                    father_full_brother>0||
+                    father_paternal_uncle>0||
+                    full_paternal_uncle_son>0||
+                    father_paternal_uncle_son>0
+                ) {
+                    if(daughter + son_daughter > 0) {
+                        print("diagram 11");
+                    } else {
+                        print("diagram 13");
+                    }
+                } else if(daughter + son_daughter > 0) {
+                    print("diagram 4");
+                } else if(mother_brother + mother_sister > 0) {
+                    print("diagram 6");
+                } else {
+                    print("diagram 5");
+                }
+            } else {
+                print("tarika for dawi arham or the State Treasury");
+            }
+        }
+
+
+
         const table = [
             {
                 relation : "wife",
@@ -2438,10 +2576,10 @@
         
         const inheritance_result_table = [];
 
-        twelveth_diagram(table, inheritance_result_table);
-        print(inheritance_result_table)
-        for(let i = 0; i<inheritance_result_table.length; i++)
-            print(inheritance_result_table[i].relation + " " + Math.round(inheritance_result_table[i].share*10000)/10000)
+        // twelveth_diagram(table, inheritance_result_table);
+        // print(inheritance_result_table)
+        // for(let i = 0; i<inheritance_result_table.length; i++)
+        //     print(inheritance_result_table[i].relation + " " + Math.round(inheritance_result_table[i].share*10000)/10000)
    </script>
 </body>
 </html>
