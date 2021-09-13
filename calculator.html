@@ -2639,19 +2639,25 @@
             if(there_is_forod_3isba(table)) {
                 if(there_is_only_spouse(table)) {
                     print("diagram 1");
+                    first_diagram(table, inheritance_result_table);
                 } else if (is_exceptional_case(table)) {
                     print("diagram 2");
+                    second_diagram(table, inheritance_result_table);
                 } else if(son > 0 || son_son > 0) {
                     print("diagram 3");
+                    third_diagram(table, inheritance_result_table);
                 } else if(full_brother > 0 || father_brother > 0) {
                     if(daughter + son_daughter > 0) {
                         print("diagram 7");
+                        seventh_diagram(table, inheritance_result_table);
                     } else {
                         print("diagram 8");
+                        eighth_diagram(table, inheritance_result_table);
                     }
                 } else if(full_sister > 0 || father_sister > 0) {
                     if(daughter + son_daughter > 0) {
                         print("diagram 9");
+                        ninth_diagram(table, inheritance_result_table);
                     } else if(
                         full_brother_son>0 ||
                         paternal_uncle_son>0||
@@ -2661,8 +2667,10 @@
                         father_paternal_uncle_son>0
                     ) {
                         print("diagram 12");
+                        twelveth_diagram(table, inheritance_result_table);
                     } else {
                         print("diagram 10");
+                        tenth_diagram(table, inheritance_result_table);
                     }
                 } else if(
                     full_brother_son>0 ||
@@ -2674,15 +2682,20 @@
                 ) {
                     if(daughter + son_daughter > 0) {
                         print("diagram 11");
+                        eleventh_diagram(table, inheritance_result_table);
                     } else {
                         print("diagram 13");
+                        thirteenth_diagram(table, inheritance_result_table);
                     }
                 } else if(daughter + son_daughter > 0) {
                     print("diagram 4");
+                    fourth_diagram(table, inheritance_result_table);
                 } else if(mother_brother + mother_sister > 0) {
                     print("diagram 6");
+                    sixth_diagram(table, inheritance_result_table);
                 } else {
                     print("diagram 5");
+                    fifth_diagram(table, inheritance_result_table);
                 }
             } else {
                 print("tarika for dawi arham or the State Treasury");
@@ -2788,12 +2801,11 @@
         
         const inheritance_result_table = [];
 
-        path_diagram(table);
+        path_diagram(table, inheritance_result_table);
 
-        // thirteenth_diagram(table, inheritance_result_table);
-        // print(inheritance_result_table)
-        // for(let i = 0; i<inheritance_result_table.length; i++)
-        //     print(inheritance_result_table[i].relation + " " + Math.round(inheritance_result_table[i].share*10000)/10000)
+        print(inheritance_result_table);
+        for(let i = 0; i<inheritance_result_table.length; i++)
+            print(inheritance_result_table[i].relation + " " + Math.round(inheritance_result_table[i].share*10000)/10000);
    </script>
 </body>
 </html>
