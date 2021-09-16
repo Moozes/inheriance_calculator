@@ -2574,7 +2574,9 @@
                 sum_of_people += table[i].number;
             }
 
-            if(sum_of_people == 1 && (wife+husband) == 1) {
+            let condition = (sum_of_people == 1 && (wife+husband) == 1) || (sum_of_people == 2 && wife == 2) || (sum_of_people == 3 && wife == 3) ||(sum_of_people == 4 && wife == 4);
+
+            if(condition) {
                 return true;
             }
             return false;
@@ -2707,7 +2709,7 @@
         const table = [
             {
                 relation : "wife",
-                number : 0
+                number : 3
             },
             {
                 relation : "husband",
